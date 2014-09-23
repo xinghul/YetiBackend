@@ -1,0 +1,17 @@
+{
+  "name": "Levi-Portfolio",
+  "description": "Levi's portfolio website",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "jquery": "~2.1.x",
+    "bootstrapvalidator": "~0.5.x",
+    "angular": "~1.2.x",
+    "angular-route": "~1.2.x",
+    "angular-loader": "~1.2.x",
+    "angular-mocks": "~1.2.x",
+    "html5-boilerplate": "~4.3.0",
+    "bootstrap": "~3.2.x",
+    "angular-ui-router": "~0.2.11"
+  }
+}

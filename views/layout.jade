@@ -1,7 +1,33 @@
-doctype html
-html
+doctype
+html(ng-app="myApp")
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    meta(charset='utf8')
+    base(href='/')
+    title Yeti
+    link(href='http://fonts.googleapis.com/css?family=Open+Sans:400,600', rel='stylesheet', type='text/css')
+    link(rel='stylesheet', href='bower_components/bootstrap/dist/css/bootstrap.min.css')
+    link(rel="stylesheet", href="bower_components/bootstrapvalidator/dist/css/bootstrapValidator.min.css")
+    link(rel='stylesheet', href='stylesheets/style.css')
   body
+    nav.navbar.navbar-inverse(role="navigation")
+        .container-fluid
+            .navbar-header
+                button(class="navbar-toggle", data-toggle="collapse", data-target="#myNav")
+                ul.nav.navbar-nav
+                    li(ui-sref-active="active")
+                        a.navbar-brand(ui-sref="index") Yeti
+            .collapse.navbar-collapse(id="myNav")
+                ul.nav.navbar-nav
+                    li(ui-sref-active="active")
+                        a(ui-sref="player") 
+                            span(class="glyphicon glyphicon-user")
+                            | #{' '}
+                            | Player
+                    li(ui-sref-active="active")
+                        a(ui-sref="quest") 
+                            span(class="glyphicon glyphicon-exclamation-sign")
+                            | #{' '}
+                            | Quest
+
+
     block content

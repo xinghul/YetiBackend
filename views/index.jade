@@ -1,5 +1,21 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    .container-fluid
+        .row
+            .col-md-6
+                div(ui-view="viewA")
+            .col-md-6
+                div(ui-view="viewB")
+                    
+    script(src="bower_components/jquery/dist/jquery.min.js")
+    script(src="bower_components/bootstrap/dist/js/bootstrap.min.js")
+    script(src="bower_components/angular/angular.js")
+    script(src="bower_components/angular-route/angular-route.js")
+    script(src="bower_components/angular-ui-router/release/angular-ui-router.min.js")
+    script(src="javascripts/app.js")
+    script(src="javascripts/services.js")
+    script(src="javascripts/controllers.js")
+    script(src="javascripts/filters.js")
+    script(src="javascripts/directives.js")
+    script(src="bower_components/bootstrapvalidator/dist/js/bootstrapValidator.min.js")
