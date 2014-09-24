@@ -1,13 +1,34 @@
-table.table.table-bordered.table-hover.table-striped
-  thead
-    tr
-      th #
-      th pid
-      th name
-  tbody
-    tr(ng-repeat="player in players")
-      td {{players.indexOf(player)}}
-      td {{player.pid}}
-      td {{player.name}}
-a(ui-sref=".new", class='btn btn-success') Add new player
-div(ui-view="viewA")
+.col-md-5
+  legend Basic Info
+  table.table.table-bordered.table-hover.table-striped
+    thead
+      tr
+        th #
+        th pid
+        th name
+    tbody
+      tr(ng-repeat="player in players")
+        td {{players.indexOf(player)}}
+        td {{player.pid}}
+        td {{player.name}}
+  button(class='btn btn-success', data-toggle="modal", data-target="#modalAddPlayer", id="showModalAddPlayer") Add player
+.col-md-7
+  legend Details
+  div(class="modal fade", id="modalAddPlayer", tabindex="-1", role="dialog", aria-labelledby="labelAddPlayer", aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        .modal-header 
+          button(type="button", class="close", data-dismiss="modal", aria-hidden="true") &times;
+          h4(class="modal-title") Add player
+        .modal-body
+          form(class="form-horizontal", role="form", id="formAddPlayer")
+            div(class="form-group")
+              label(class="col-md-2 control-label") Name
+              .col-md-10
+                input(type="text", class="form-control", placeholder="Player's Name", name="name", ng-model="playerName")
+                //- input(type="text", name="field[]", class="form-control", placeholder="", ng-model="dataAddNode[field]")
+        .modal-footer
+          button(class="btn btn-default", data-dismiss="modal") Close
+          button(ng-click='addPlayer()', data-dismiss="modal", class="btn btn-success") Add
+
+

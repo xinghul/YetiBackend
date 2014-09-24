@@ -12,45 +12,33 @@ var myApp;
   ])
   .config(function ($stateProvider, $urlRouterProvider){
         
-    // For any unmatched url, send to /route1
     $urlRouterProvider.otherwise("/");
     
     $stateProvider
-        .state('index', {
-            url: "/",
+        .state('#', {
+            url: "",
             views: {
                 "viewA": {
-                    template: "index.viewA"
+                    template: "Here goes the introduction."
                 },
                 "viewB": {
-                    template: "index.viewB"
+                    template: "Here goes the pictures, etc."
                 }
             }
         })
         .state('player', {
-            url: "/player",
+            url: '/player',
             views: {
-                "viewA": {
-                    templateUrl: 'player',
-                    controller: 'PlayerCtrl'
-                },
-                "viewB": {
-                    template: "player.viewB"
-                }
-            }
-        })
-          .state('player.new', {
-            url: "/new",
-            views: {
-              "viewA": {
-                templateUrl: 'newplayer'
+              'viewC': {
+                templateUrl: 'player',
+                controller: 'PlayerCtrl'
               }
             }
-          })
+        })
         .state('quest', {
-            url: "/quest",
+            url: '/quest',
             views: {
-                "viewC": {
+                'viewC': {
                     templateUrl: "quest",
                     controller: "dBeaconCtrl"
                 }
