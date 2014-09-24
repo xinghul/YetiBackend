@@ -1,8 +1,47 @@
 body {
   padding: 50px;
+  background-color: #FDF3E7;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+#error_page {
+  background-image: url(http://techixoft.com/home/wp-content/uploads/2011/07/1.jpg);
+  background-size: cover;
+}
+
+.node {
+  cursor: pointer;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+circle:focus {
+  outline: none;
+}
+
+svg text {
+  pointer-events: none;
+}
+
+.link {
+  stroke: #999;
+  stroke-width: 2px;
+  stroke-opacity: .6;
+}
+
+path.chord {
+  fill-opacity: .67;
+}
+
+#frame svg {
+  display: block;
+  margin: auto;
+  width: 100%;
+  border: 1px solid #eee;
+  background-image: url(/images/bg.jpg);
 }

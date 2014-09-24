@@ -1,8 +1,4 @@
-extends layout
-
-block content
-    h1= title
-    form#formAddPlayer(name="addplayer", method="post", action="/api/players")
-        input#name(type="text", placeholder="name", name="name")
-        br
-        button(type="submit") Add
+form#formAddPlayer(name="addplayer", method="post", action="/api/players")
+    input#name(type="text", placeholder="name", name="name")
+    br
+    button(type="submit") Add

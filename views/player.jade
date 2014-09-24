@@ -1,0 +1,13 @@
+table.table.table-bordered.table-hover.table-striped
+  thead
+    tr
+      th #
+      th pid
+      th name
+  tbody
+    tr(ng-repeat="player in players")
+      td {{players.indexOf(player)}}
+      td {{player.pid}}
+      td {{player.name}}
+a(ui-sref=".new", class='btn btn-success') Add new player
+div(ui-view="viewA")

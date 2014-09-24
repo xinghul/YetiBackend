@@ -31,21 +31,28 @@ var myApp;
             url: "/player",
             views: {
                 "viewA": {
-                    template: "player.viewA"
+                    templateUrl: 'player',
+                    controller: 'PlayerCtrl'
                 },
                 "viewB": {
                     template: "player.viewB"
                 }
             }
         })
+          .state('player.new', {
+            url: "/new",
+            views: {
+              "viewA": {
+                templateUrl: 'newplayer'
+              }
+            }
+          })
         .state('quest', {
             url: "/quest",
             views: {
-                "viewA": {
-                    template: "quest.viewA"
-                },
-                "viewB": {
-                    template: "quest.viewB"
+                "viewC": {
+                    templateUrl: "quest",
+                    controller: "dBeaconCtrl"
                 }
             }
         });

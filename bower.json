@@ -1,6 +1,6 @@
 {
-  "name": "Levi-Portfolio",
-  "description": "Levi's portfolio website",
+  "name": "Yeti Backend",
+  "description": "Team Yeti's backend website",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
@@ -12,6 +12,7 @@
     "angular-mocks": "~1.2.x",
     "html5-boilerplate": "~4.3.0",
     "bootstrap": "~3.2.x",
+    "d3": "~3.4.x",
     "angular-ui-router": "~0.2.11"
   }
 }

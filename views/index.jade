@@ -3,10 +3,12 @@ extends layout
 block content
     .container-fluid
         .row
-            .col-md-6
+            .col-md-4
                 div(ui-view="viewA")
-            .col-md-6
+            .col-md-8
                 div(ui-view="viewB")
+            .col-md-12
+                div(ui-view="viewC")
                     
     script(src="bower_components/jquery/dist/jquery.min.js")
     script(src="bower_components/bootstrap/dist/js/bootstrap.min.js")
