@@ -273,7 +273,8 @@
           .attr("r", 13);
     }
   });
-  myApp.controller('PlayerCtrl', function ($scope, $route, $http, $timeout) {
+  myApp.controller('PlayerCtrl', function ($scope, $state, $http, $timeout) {
+    $scope.playerDetails = null;
     $http.get('/api/players').
     success(function (data, status, headers, config) {
       console.log(data);
@@ -282,18 +283,14 @@
     $scope.addPlayer = function () {
       $http.post('/api/players', {"name": $scope.playerName}).
         success(function (data) {
-          refreshView(data);
+          // $state.transitionTo('#');
+          // return $timeout(function () {
+          //     $state.go('.', {}, { location: true, reload: true });
+          // }, 100);
         });
     };
-
-    var refreshView = function (data) {
-      // $timeout(function () {
-      //   $scope.graphInfo = data.msg;
-      //   $scope.$apply();
-      // });
-      $timeout(function () {
-        $route.reload();
-      }, 1500);
-    };
+    $scope.showDetails = function (data) {
+      $scope.playerDetails = data;
+    }
   });
 }());

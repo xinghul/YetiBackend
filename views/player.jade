@@ -7,13 +7,19 @@
         th pid
         th name
     tbody
-      tr(ng-repeat="player in players")
+      tr(ng-repeat="player in players", ng-click="showDetails(player)")
         td {{players.indexOf(player)}}
         td {{player.pid}}
         td {{player.name}}
   button(class='btn btn-success', data-toggle="modal", data-target="#modalAddPlayer", id="showModalAddPlayer") Add player
 .col-md-7
-  legend Details
+  div(ng-show="playerDetails")
+    div(ng-model='playerDetails')
+      legend Details
+      table.table.table-bordered.table-hover.table-striped
+        tr(ng-repeat='(key, value) in playerDetails')
+          th {{key}}
+          td {{value}}
   div(class="modal fade", id="modalAddPlayer", tabindex="-1", role="dialog", aria-labelledby="labelAddPlayer", aria-hidden="true")
     .modal-dialog
       .modal-content
