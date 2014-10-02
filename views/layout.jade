@@ -7,6 +7,7 @@ html(ng-app="myApp")
     script(src="bower_components/d3/d3.min.js")
     link(href='http://fonts.googleapis.com/css?family=Open+Sans:400,600', rel='stylesheet', type='text/css')
     link(rel='stylesheet', href='bower_components/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='bower_components/fontawesome/css/font-awesome.min.css')
     link(rel="stylesheet", href="bower_components/bootstrapvalidator/dist/css/bootstrapValidator.min.css")
     link(rel='stylesheet', href='stylesheets/style.css')
   body
@@ -16,19 +17,23 @@ html(ng-app="myApp")
                 button(class="navbar-toggle", data-toggle="collapse", data-target="#myNav")
                 ul.nav.navbar-nav
                     li(ui-sref-active="active")
-                        a.navbar-brand(ui-sref="#") Yeti
+                        a.navbar-brand(ui-sref="index") Yeti
             .collapse.navbar-collapse(id="myNav")
                 ul.nav.navbar-nav
                     li(ui-sref-active="active")
                         a(ui-sref="player") 
-                            span(class="glyphicon glyphicon-user")
+                            i(class="fa fa-users fa-fw fa-lg")
+                            | Players
+                    li(ui-sref-active="active")
+                        a(ui-sref="animal") 
+                            span(class="fa fa-paw fa-fw fa-lg")
                             | #{' '}
-                            | Player
+                            | Animals
                     li(ui-sref-active="active")
                         a(ui-sref="quest") 
-                            span(class="glyphicon glyphicon-exclamation-sign")
+                            span(class="fa fa-exclamation-circle fa-fw fa-lg")
                             | #{' '}
-                            | Quest
+                            | Missions
 
 
     block content

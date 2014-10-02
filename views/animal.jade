@@ -1,0 +1,71 @@
+.col-md-5
+  legend Basic Info
+  table.table.table-bordered.table-hover.table-striped
+    thead
+      tr
+        th #
+        th aid
+        th name
+    tbody
+      tr(ng-repeat="animal in animals", ng-click="showDetails(animal)")
+        td {{animals.indexOf(animal)}}
+        td {{animal.aid}}
+        td {{animal.name}}
+  button(class='btn btn-success', data-toggle="modal", data-target="#modalAddAnimal", id="showModalAddAnimal") Add animal
+.col-md-7
+  div(ng-show="animalDetails")
+    div(ng-model='animalDetails')
+      legend Details
+      table.table.table-bordered.table-hover.table-striped
+        tr(ng-repeat='(key, value) in animalDetails')
+          th {{key}}
+          td {{value}}
+  div(class="modal fade", id="modalAddAnimal", tabindex="-1", role="dialog", aria-labelledby="labelAddAnimal", aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        .modal-header 
+          button(type="button", class="close", data-dismiss="modal", aria-hidden="true") &times;
+          h4(class="modal-title") Add animal
+        .modal-body
+          form(class="form-horizontal", role="form", id="formAddAnimal")
+            div(class="form-group")
+              label(class="col-md-2 control-label") Name
+              .col-md-10
+                input(type="text", class="form-control", placeholder="Animal's Name", name="name", ng-model="animalInfo['name']")
+            div(class="form-group")
+              label(class="col-md-2 control-label") Model
+              .col-md-10
+                input(type="text", class="form-control", placeholder="Animal's Model", name="model", ng-model="animalInfo['model']")
+            div(class="form-group")
+              label(class="col-md-2 control-label") Category
+              .col-md-10
+                input(type="text", class="form-control", placeholder="Animal's Category", name="category", ng-model="animalInfo['category']")
+            div(class="form-group")
+              label(class="col-md-2 control-label") Diet
+              .col-md-10
+                input(type="text", class="form-control", placeholder="Animal's Diet", name="diet", ng-model="animalInfo['diet']")
+            div(class="form-group")
+              label(class="col-md-2 control-label") Sound
+              .col-md-10
+                input(type="text", class="form-control", placeholder="Animal's Sound", name="sound", ng-model="animalInfo['sound']")
+            div(class="form-group")
+              label(class="col-md-2 control-label") Min Height
+              .col-md-10
+                input(type="text", class="form-control", placeholder="Animal's Min Height", name="minheight", ng-model="animalInfo['minheight']")
+            div(class="form-group")
+              label(class="col-md-2 control-label") Max Height
+              .col-md-10
+                input(type="text", class="form-control", placeholder="Animal's Max Height", name="maxheight", ng-model="animalInfo['maxheight']")
+            div(class="form-group")
+              label(class="col-md-2 control-label") Min Weight
+              .col-md-10
+                input(type="text", class="form-control", placeholder="Animal's Min Weight", name="minweight", ng-model="animalInfo['minweight']")
+            div(class="form-group")
+              label(class="col-md-2 control-label") Max Weight
+              .col-md-10
+                input(type="text", class="form-control", placeholder="Animal's Max Weight", name="maxweight", ng-model="animalInfo['maxweight']")
+        .modal-footer
+          button(class="btn btn-default", data-dismiss="modal") Close
+          button(ng-click='addAnimal()', data-dismiss="modal", class="btn btn-success") Add
+
+

@@ -1,41 +1,41 @@
-var express = require('express');
-var router = express.Router();
-var player = require('./apis/player');
-var dBeacon = require('./apis/dBeacon');
+(function () {
+    "use strict"
+    var express = require('express');
+    var Q = require('q');
+    var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res) {
-  res.render('index', { title: 'Yeti Backend' });
-});
+    var db_name = "yeti";
+    var db = require("mongoose").connect("mongodb://127.0.0.1:27017/" + db_name, function (err) {
+        if (!err)
+            console.log("Connected to database " + db_name);
+    });
 
-router.get('/newplayer', function (req, res) {
-    res.render('newplayer');
-});
+    var api = require('./api');
 
-router.get('/quest', function (req, res) {
-    res.render('dbeacon');
-});
+    var responseHandler = function (value) {
 
-router.get('/player', function (req, res) {
-    res.render('player');
-});
+    }
 
-router.get('/api/player', player.GetPlayer());
+    /* GET home page. */
+    router.get('/', function(req, res) {
+      res.render('index', { title: 'Yeti Backend' });
+    });
 
-router.get('/api/players', player.GetPlayers());
+    router.get('/quest', function (req, res) {
+        res.render('dbeacon');
+    });
 
-router.post('/api/players', player.AddPlayer());
+    router.get('/player', function (req, res) {
+        res.render('player');
+    });
 
-//for demo
-router.post('/api/dbeacon/query', dBeacon.query);
-router.post('/api/dbeacon/update', dBeacon.updateById);
-router.post('/api/dbeacon/addnode', dBeacon.addNode);
-router.post('/api/dbeacon/addrls', dBeacon.addRls);
-router.post('/api/dbeacon/delete', dBeacon.deleteById);
+    router.get('/animal', function (req, res) {
+        res.render('animal');
+    });
 
-router.get('/api/dbeacon/list', dBeacon.getAll);
-router.get('/api/dbeacon/relation', dBeacon.getRelation);
-router.get('/api/dbeacon/beacons/:_attr', dBeacon.getAttr);
-router.get('/api/dbeacon/list/:_type', dBeacon.getType);
+    router.use('/api', api);
 
-module.exports = router;
+    module.exports = router;
+
+}());
+    

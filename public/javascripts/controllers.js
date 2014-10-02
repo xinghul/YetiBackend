@@ -283,14 +283,33 @@
     $scope.addPlayer = function () {
       $http.post('/api/players', {"name": $scope.playerName}).
         success(function (data) {
-          // $state.transitionTo('#');
-          // return $timeout(function () {
-          //     $state.go('.', {}, { location: true, reload: true });
-          // }, 100);
+          return $timeout(function () {
+            $state.go('.', {}, { reload: true });
+          }, 1000);
         });
     };
     $scope.showDetails = function (data) {
       $scope.playerDetails = data;
+    }
+  });
+  myApp.controller('AnimalCtrl', function ($scope, $state, $http, $timeout) {
+    $scope.animalDetails = null;
+    $scope.animalInfo = {};
+    $http.get('/api/animals').
+    success(function (data, status, headers, config) {
+      console.log(data);
+      $scope.animals = data;
+    });
+    $scope.addAnimal = function () {
+      $http.post('/api/animals', {data: $scope.animalInfo}).
+        success(function (data) {
+          return $timeout(function () {
+            $state.go('.', {}, { reload: true });
+          }, 1000);
+        });
+    };
+    $scope.showDetails = function (data) {
+      $scope.animalDetails = data;
     }
   });
 }());

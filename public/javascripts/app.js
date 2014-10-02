@@ -15,11 +15,11 @@ var myApp;
     $urlRouterProvider.otherwise("/");
     
     $stateProvider
-        .state('#', {
-            url: "",
+        .state('index', {
+            url: "/",
             views: {
                 "viewA": {
-                    template: "Here goes the introduction."
+                    template: "Team Y.E.T.I. (Youth Education Tundra Initiative) seeks to create an educational game that will transport its players to the arctic tundra. We are working with Mountainview Elementary to give its students an immersive experience that will make them feel as if they are encountering the biome firsthand and familiarize them with the area’s ecosystem. Our game will be developed with tools at the forefront of technology used in the classroom. Our goal is to give our players a feeling of discovery and a sense of the types of life forms that inhabit this unique biome. We want our game not only to excite the players but also encourage them to explore and find out more about this amazing habitat. Project Instructors: Mike Christel and Jess Trybus"
                 },
                 "viewB": {
                     template: "Here goes the pictures, etc."
@@ -32,6 +32,15 @@ var myApp;
               'viewC': {
                 templateUrl: 'player',
                 controller: 'PlayerCtrl'
+              }
+            }
+        })
+        .state('animal', {
+            url: '/animal',
+            views: {
+              'viewC': {
+                templateUrl: 'animal',
+                controller: 'AnimalCtrl'
               }
             }
         })
