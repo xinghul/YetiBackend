@@ -11,7 +11,9 @@
         td {{players.indexOf(player)}}
         td {{player.pid}}
         td {{player.name}}
-  button(class='btn btn-success', data-toggle="modal", data-target="#modalAddPlayer", id="showModalAddPlayer") Add player
+  button(class='btn btn-success', data-toggle="modal", data-target="#modalAddPlayer", id="showModalAddPlayer") 
+    i(class="fa fa-plus fa-fw fa-lg")
+    | Add
 .col-md-7
   div(ng-show="playerDetails")
     div(ng-model='playerDetails')

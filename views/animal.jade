@@ -11,7 +11,9 @@
         td {{animals.indexOf(animal)}}
         td {{animal.aid}}
         td {{animal.name}}
-  button(class='btn btn-success', data-toggle="modal", data-target="#modalAddAnimal", id="showModalAddAnimal") Add animal
+  button(class='btn btn-success', data-toggle="modal", data-target="#modalAddAnimal", id="showModalAddAnimal")
+    i(class="fa fa-plus fa-fw fa-lg")
+    | Add
 .col-md-7
   div(ng-show="animalDetails")
     div(ng-model='animalDetails')
