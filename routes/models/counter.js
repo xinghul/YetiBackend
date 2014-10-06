@@ -1,5 +1,5 @@
 (function () {
-    "use strict"
+    "use strict";
     var mongoose = require("mongoose");
     var Q = require("q");
     var Counter = (function () {

@@ -1,5 +1,5 @@
 (function () {
-    "use strict"
+    "use strict";
     var express = require('express');
     var Q = require('q');
     var router = express.Router();
@@ -16,6 +16,15 @@
     router.get('/player', function (req, res) {
         player.getPlayer(req.query.pid).then(function (player) {
             res.json(player);
+        }, function (reason) {
+            console.log(reason);
+            res.json(reason);
+        });
+    });
+
+    router.delete('/player/:pid', function (req, res) {
+        player.deletePlayer(req.params.pid).then(function (value) {
+            res.json(value);
         }, function (reason) {
             res.json(reason);
         });
@@ -41,6 +50,14 @@
     router.get('/animal', function (req, res) {
         animal.getAnimal(req.query.aid).then(function (animal) {
             res.json(animal);
+        }, function (reason) {
+            res.json(reason);
+        });
+    });
+
+    router.delete('/animal/:aid', function (req, res) {
+        animal.deleteAnimal(req.params.aid).then(function (value) {
+            res.json(value);
         }, function (reason) {
             res.json(reason);
         });

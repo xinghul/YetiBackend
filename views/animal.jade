@@ -1,27 +1,36 @@
 .col-md-5
-  legend Basic Info
-  table.table.table-bordered.table-hover.table-striped
-    thead
-      tr
-        th #
-        th aid
-        th name
-    tbody
-      tr(ng-repeat="animal in animals", ng-click="showDetails(animal)")
-        td {{animals.indexOf(animal)}}
-        td {{animal.aid}}
-        td {{animal.name}}
-  button(class='btn btn-success', data-toggle="modal", data-target="#modalAddAnimal", id="showModalAddAnimal")
-    i(class="fa fa-plus fa-fw fa-lg")
-    | Add
+  div(class="display-table")
+    span(class="display-title")
+      i(class="fa fa-fw fa-lg fa-flag")
+      | Animals
+    table.table.table-bordered.table-hover.table-striped
+      thead
+        tr
+          th #
+          th aid
+          th name
+      tbody
+        tr(ng-repeat="animal in animals", ng-click="showDetails(animal)")
+          td {{animals.indexOf(animal)}}
+          td {{animal.aid}}
+          td {{animal.name}}
+    button(class='btn btn-success', data-toggle="modal", data-target="#modalAddAnimal", id="showModalAddAnimal")
+      i(class="fa fa-plus fa-fw fa-lg")
+      | Add
 .col-md-7
-  div(ng-show="animalDetails")
+  div(ng-show="animalDetails", class="display-table")
     div(ng-model='animalDetails')
-      legend Details
+      span(class="display-title")
+        i(class="fa fa-fw fa-lg fa-spin fa-cog")
+        | Details
       table.table.table-bordered.table-hover.table-striped
         tr(ng-repeat='(key, value) in animalDetails')
           th {{key}}
           td {{value}}
+      div(class="text-right")
+        button(class="btn btn-danger", ng-click="deleteAnimal()") 
+          i(class="fa fa-trash fa-fw fa-lg")
+          | Delete
   div(class="modal fade", id="modalAddAnimal", tabindex="-1", role="dialog", aria-labelledby="labelAddAnimal", aria-hidden="true")
     .modal-dialog
       .modal-content

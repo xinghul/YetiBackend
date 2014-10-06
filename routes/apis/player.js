@@ -1,8 +1,8 @@
 (function () {
-    "use strict"
+    "use strict";
     var mongoose = require("mongoose");
     var Counter = require("../models/counter");
-    var Q = require("q")
+    var Q = require("q");
 
     var Player = (function () {
         var playerSchema = mongoose.Schema({
@@ -84,5 +84,20 @@
         });
         return deferred.promise;
     }
-}())
+
+    exports.deletePlayer = function (pid) {
+        var deferred = Q.defer();
+        if ([null, undefined].indexOf(pid) !== -1)
+            deferred.reject({success: 0, msg: "Please specify the pid for the player."});
+        else {
+            Player.remove({pid: pid}, function (err, result) {
+                if (err)
+                    deferred.reject(err);
+                else
+                    deferred.resolve(result);
+            });
+        }
+        return deferred.promise;
+    }
+}());
     

@@ -85,7 +85,6 @@
     success(function (data, status, headers, config) {
       $scope.data = data;
       $scope.graphInfo = "Displaying " + data.nodes.length + " nodes, " + data.links.length + " relationships.";
-      console.log(data);
       initLabelFields();
       updateColorRef();
       updateGraph();
@@ -274,42 +273,62 @@
     }
   });
   myApp.controller('PlayerCtrl', function ($scope, $state, $http, $timeout) {
-    $scope.playerDetails = null;
-    $http.get('/api/players').
-    success(function (data, status, headers, config) {
-      console.log(data);
-      $scope.players = data;
-    });
-    $scope.addPlayer = function () {
-      $http.post('/api/players', {"name": $scope.playerName}).
-        success(function (data) {
-          return $timeout(function () {
-            $state.go('.', {}, { reload: true });
-          }, 1000);
-        });
-    };
-    $scope.showDetails = function (data) {
-      $scope.playerDetails = data;
-    }
+      $scope.playerDetails = null;
+      $http.get('/api/players').
+      success(function (data, status, headers, config) {
+          $scope.players = data;
+      });
+      $scope.addPlayer = function () {
+        $http.post('/api/players', {"name": $scope.playerName}).
+            success(function (data) {
+                return $timeout(function () {
+                    $state.go('.', {}, { reload: true });
+                }, 1000);
+            });
+      };
+      $scope.showDetails = function (data) {
+          $scope.playerDetails = data;
+      }
+      $scope.deletePlayer = function () {
+          $http.delete('/api/player/' + $scope.playerDetails.pid).
+              success(function (data, status, headers, config) {
+                  return $timeout(function () {
+                      $state.go('player', {}, { reload: true });
+                  }, 1000);
+              }).
+              error(function (data, status, headers, config) {
+                  console.log(data);
+              });
+      }
   });
   myApp.controller('AnimalCtrl', function ($scope, $state, $http, $timeout) {
-    $scope.animalDetails = null;
-    $scope.animalInfo = {};
-    $http.get('/api/animals').
-    success(function (data, status, headers, config) {
-      console.log(data);
-      $scope.animals = data;
+      $scope.animalDetails = null;
+      $scope.animalInfo = {};
+      $http.get('/api/animals').
+      success(function (data, status, headers, config) {
+          $scope.animals = data;
+      });
+      $scope.addAnimal = function () {
+          $http.post('/api/animals', {data: $scope.animalInfo}).
+              success(function (data) {
+                  return $timeout(function () {
+                      $state.go('.', {}, { reload: true });
+                  }, 1000);
+              });
+      };
+      $scope.showDetails = function (data) {
+          $scope.animalDetails = data;
+      };
+      $scope.deleteAnimal = function () {
+          $http.delete('/api/animal/' + $scope.animalDetails.aid).
+              success(function (data, status, headers, config) {
+                  return $timeout(function () {
+                      $state.go('animal', {}, { reload: true });
+                  }, 1000);
+              }).
+              error(function (data, status, headers, config) {
+                  console.log(data);
+              });
+      };
     });
-    $scope.addAnimal = function () {
-      $http.post('/api/animals', {data: $scope.animalInfo}).
-        success(function (data) {
-          return $timeout(function () {
-            $state.go('.', {}, { reload: true });
-          }, 1000);
-        });
-    };
-    $scope.showDetails = function (data) {
-      $scope.animalDetails = data;
-    }
-  });
 }());

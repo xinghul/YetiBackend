@@ -1,5 +1,5 @@
 (function () {
-    "use strict"
+    "use strict";
     var mongoose = require("mongoose");
     var Counter = require("../models/counter");
     var Q = require("q");
@@ -82,19 +82,36 @@
 
     exports.addAnimal = function (data) {
         var deferred = Q.defer();
-        if ([null, undefined].indexOf(data.name) != -1) 
-            res.json({success : 0, msg : "Please specify the name for the animal."})
-        var animal = new Animal(data);
-        Counter.getNextSequence('animal').then(function (aid) {
-            animal.aid = aid;
-            animal.save(function (err, product, numberAffected) {
-                if (err) 
-                    deferred.reject({success : 0, msg : err});
-                else
-                    deferred.resolve(product);
+        if ([null, undefined].indexOf(data.name) !== -1) 
+            deferred.reject({success: 0, msg: "Please specify the name for the animal."});
+        else {
+            var animal = new Animal(data);
+            Counter.getNextSequence('animal').then(function (aid) {
+                animal.aid = aid;
+                animal.save(function (err, product, numberAffected) {
+                    if (err) 
+                        deferred.reject({success : 0, msg : err});
+                    else
+                        deferred.resolve(product);
+                });
             });
-        });
+        }
         return deferred.promise;
     }
-}())
+
+    exports.deleteAnimal = function (aid) {
+        var deferred = Q.defer();
+        if ([null, undefined].indexOf(aid) !== -1)
+            deferred.reject({success: 0, msg: "Please specify the aid for the animal."});
+        else {
+            Animal.remove({aid: aid}, function (err, result) {
+                if (err)
+                    deferred.reject(err);
+                else
+                    deferred.resolve(result);
+            });
+        }
+        return deferred.promise;
+    }
+}());
     
