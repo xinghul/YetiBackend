@@ -82,7 +82,7 @@
 
     //for tablet authenticate
     router.post("/signup", function (req, res) {
-        auth.signUp(req.body.data).then(function (value) {
+        auth.signUp(req.body).then(function (value) {
             res.json(value);
         }, function (reason) {
             res.json(reason);
@@ -90,7 +90,7 @@
     });
 
     router.post("/login", function (req, res) {
-        auth.logIn(req.body.data).then(function (value) {
+        auth.logIn(req.body).then(function (value) {
             res.json(value);
         }, function (reason) {
             res.json(reason);
