@@ -7,6 +7,7 @@
     var player = require('./apis/player');
     var animal = require('./apis/animal');
     var dBeacon = require('./apis/dBeacon');
+    var auth = require("./apis/auth");
 
     var responseHandler = function (value) {
 
@@ -79,6 +80,22 @@
         });
     });
 
+    //for tablet authenticate
+    router.post("/signup", function (req, res) {
+        auth.signUp(req.body.data).then(function (value) {
+            res.json(value);
+        }, function (reason) {
+            res.json(reason);
+        });
+    });
+
+    router.post("/login", function (req, res) {
+        auth.logIn(req.body.data).then(function (value) {
+            res.json(value);
+        }, function (reason) {
+            res.json(reason);
+        });
+    });
     
 
     //for demo

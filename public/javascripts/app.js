@@ -52,6 +52,33 @@ var myApp;
                     controller: "dBeaconCtrl"
                 }
             }
+        })
+        .state("login", {
+            url: "/login",
+            views: {
+                "viewC": {
+                    templateUrl: "login",
+                    controller: "LoginCtrl"
+                }
+            }
+        })
+        .state("signup", {
+            url: "/signup",
+            views: {
+                "viewC": {
+                    templateUrl: "signup",
+                    controller: "SignupCtrl"
+                }
+            }
+        })
+        .state("profile", {
+            url: "/profile",
+            views: {
+                "viewC": {
+                    templateUrl: "profile",
+                    controller: "ProfileCtrl"
+                }
+            }
         });
   });
 }());

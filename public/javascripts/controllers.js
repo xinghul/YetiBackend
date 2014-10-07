@@ -330,5 +330,26 @@
                   console.log(data);
               });
       };
-    });
+  });
+  myApp.controller("LoginCtrl", function ($scope, $state, $http, $timeout) {
+      $scope.userInfo = {};
+      $scope.logIn = function () {
+          $http.post('/api/login', {data: $scope.userInfo}).
+          success(function (data, status, headers, config) {
+              console.log(data);
+          });
+      };
+  });
+  myApp.controller("SignupCtrl", function ($scope, $state, $http) {
+      $scope.userInfo = {};
+      $scope.signUp = function () {
+          $http.post('/api/signup', {data: $scope.userInfo}).
+          success(function (data, status, headers, config) {
+              console.log(data);
+          });
+      };
+  });
+  myApp.controller("ProfileCtrl", function ($scope, $state, $http) {
+
+  });
 }());

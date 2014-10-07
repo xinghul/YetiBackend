@@ -9,6 +9,10 @@ a {
   color: #00B7FF;
 }
 
+.login {
+  margin-top: 10px;
+}
+
 .display-table {
   background: #fff;
   border: 2px solid rgba(196, 169, 121, 0.7);
