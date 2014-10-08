@@ -11,7 +11,7 @@
     var flash        = require("flash");
     var session      = require("express-session");
 
-    var configDB = require("./config/database");
+    var configDB     = require("./config/database");
     mongoose.connect(configDB.url, function (err) {
         if (!err)
             console.log(configDB.successMsg);

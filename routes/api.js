@@ -1,13 +1,14 @@
 (function () {
     "use strict";
-    var express = require('express');
-    var Q = require('q');
-    var router = express.Router();
+    var express  = require('express');
+    var Q        = require('q');
+    var router   = express.Router();
 
-    var player = require('./apis/player');
-    var animal = require('./apis/animal');
-    var dBeacon = require('./apis/dBeacon');
-    var auth = require("./apis/auth");
+    var player   = require('./apis/player');
+    var animal   = require('./apis/animal');
+    var dBeacon  = require('./apis/dBeacon');
+    var auth     = require("./apis/auth");
+    var log      = require("./apis/log");
 
     var responseHandler = function (value) {
 
@@ -94,6 +95,46 @@
             res.json(value);
         }, function (reason) {
             res.json(reason);
+        });
+    });
+
+    router.post("/quicklogin", function (req, res) {
+        auth.quickLogIn(req.body).then(function (value) {
+            res.json({ success: true, user: value} );
+        }, function (reason) {
+            res.json({ success: false, msg: reason} );
+        });
+    });
+
+    router.post("/log/newgame", function (req, res) {
+        log.startNewGame(req.body).then(function (value) {
+            res.json({ success: true, log: value} );
+        }, function (reason) {
+            res.json({ success: false, msg: reason} );
+        });
+    });
+
+    router.post("/log/firstclue", function (req, res) {
+        log.firstClueTapped(req.body).then(function (value) {
+            res.json({ success: true, log: value} );
+        }, function (reason) {
+            res.json({ success: false, msg: reason} );
+        });
+    });
+
+    router.post("/log/firstanimal", function (req, res) {
+        log.firstAnimalTapped(req.body).then(function (value) {
+            res.json({ success: true, log: value} );
+        }, function (reason) {
+            res.json({ success: false, msg: reason} );
+        });
+    });
+
+    router.post("/log/firstmission", function (req, res) {
+        log.firstMissionCompleted(req.body).then(function (value) {
+            res.json({ success: true, log: value} );
+        }, function (reason) {
+            res.json({ success: false, msg: reason} );
         });
     });
     
