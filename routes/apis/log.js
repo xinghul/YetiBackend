@@ -6,6 +6,15 @@
     var User     = require("../models/user-playtest").User;
     var Log      = require("../models/user-playtest").Log;
 
+    User.findOne({ mac: "123"})
+    .populate("logs")
+    .exec(function (err, user) {
+        if (err)
+            console.log(err);
+        else
+            console.log(user);
+    });
+
     exports.startNewGame = function (data) {
         var deferred = Q.defer();
         if ([undefined, null].indexOf(data) !== -1 ||
