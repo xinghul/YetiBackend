@@ -6,6 +6,17 @@
     var User     = require("../models/user-playtest").User;
     var Log      = require("../models/user-playtest").Log;
 
+    exports.downloadLog = function () {
+        var deferred = Q.defer();
+        Log.find({}, {}, function (err, logs) {
+            if (err)
+                deferred.reject(err);
+            else
+                deferred.resolve(logs); 
+        });
+        return deferred.promise;
+    }
+
     exports.startNewGame = function (data) {
         var deferred = Q.defer();
         if ([undefined, null].indexOf(data) !== -1 ||

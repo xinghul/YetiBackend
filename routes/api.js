@@ -137,6 +137,16 @@
             res.json({ success: false, msg: reason} );
         });
     });
+
+    router.get("/log/download", function (req, res) {
+        log.downloadLog().then(function (value) {
+            res.attachment('result.json');
+            res.setHeader('Content-Type', 'application/octet-stream');
+            res.end(JSON.stringify(value, null, 2), 'utf8');
+        }, function (reason) {
+            res.json({ success: false, msg: reason});
+        });
+    });
     
 
     //for demo

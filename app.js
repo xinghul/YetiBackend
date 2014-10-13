@@ -28,7 +28,11 @@
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded());
     app.use(cookieParser());
-    app.use(session({ secret: "ILoveTeamYeti" }));
+    app.use(session({ 
+        secret: "ILoveTeamYeti",
+        resave: true,
+        saveUninitialized: true
+    }));
     app.use(flash());
     app.use(express.static(path.join(__dirname, 'public')));
 
