@@ -19,9 +19,13 @@
     }
 
     /* GET home page. */
-    router.get('/', function(req, res) {
+    router.get('/', function (req, res) {
         res.render('index', { title: 'Yeti Backend' });
     });
+
+    router.get("/about", function (req, res) {
+        res.render("about");
+    })
 
     router.get('/quest', function (req, res) {
         res.render('dbeacon');
