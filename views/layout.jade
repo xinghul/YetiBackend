@@ -32,6 +32,10 @@ html(ng-app="myApp")
                         a(ui-sref="quest") 
                             i(class="fa fa-exclamation-circle fa-fw fa-lg")
                             | Missions
+                    li(ui-sref-active="active")
+                        a(ui-sref="game") 
+                            i(class="fa fa-futbol-o fa-fw fa-lg")
+                            | Game
                     li
                         a(href="/api/log/download") 
                             i(class="fa fa-file fa-fw fa-lg")

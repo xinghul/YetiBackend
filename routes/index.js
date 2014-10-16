@@ -39,6 +39,10 @@
         res.render('animal');
     });
 
+    router.get("/game", function (req, res) {
+        res.render("game");
+    });
+
     router.get("/login", function (req, res) {
         res.render("login", { message: req.flash("loginMessage") });
     });
