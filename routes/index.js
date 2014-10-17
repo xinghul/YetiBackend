@@ -43,6 +43,14 @@
         res.render("game");
     });
 
+    router.get("/log", function (req, res) {
+        res.render("log");
+    });
+
+    router.get("/log/:name", function (req, res) {
+        res.render("log/" + req.params.name);
+    });
+
     router.get("/login", function (req, res) {
         res.render("login", { message: req.flash("loginMessage") });
     });

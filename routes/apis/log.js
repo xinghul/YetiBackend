@@ -17,6 +17,31 @@
         return deferred.promise;
     }
 
+    exports.getDuration = function () {
+        var deferred = Q.defer();
+        Log.find({}, {}, function (err, logs) {
+            if (err)
+                deferred.reject(err);
+            else {
+                var result  = {},
+                    mission = [],
+                    clue    = [];
+                logs.forEach(function (log) {
+                    if ([undefined, null].indexOf(log.mission) === -1) {
+                        mission.push((log.mission - log.start) / 1000);
+                    }
+                    if ([undefined, null].indexOf(log.clue) === -1) {
+                        clue.push((log.clue - log.start) / 1000);
+                    }
+                });
+                result.mission = mission;
+                result.clue    = clue;
+                deferred.resolve(result);
+            }
+        });
+        return deferred.promise;
+    }
+
     exports.startNewGame = function (data) {
         var deferred = Q.defer();
         if ([undefined, null].indexOf(data) !== -1 ||

@@ -36,10 +36,14 @@ html(ng-app="myApp")
                         a(ui-sref="game") 
                             i(class="fa fa-futbol-o fa-fw fa-lg")
                             | Game
-                    li
-                        a(href="/api/log/download") 
+                    li(ui-sref-active="active")
+                        a(ui-sref="log") 
                             i(class="fa fa-file fa-fw fa-lg")
                             | Logs
+                    //- li
+                    //-     a(href="/api/log/download") 
+                    //-         i(class="fa fa-file fa-fw fa-lg")
+                    //-         | Logs
                 //- div(class="pull-right login")
                 //-     div(class="btn-group")
                 //-         a(ui-sref="login", class="btn btn-sm btn-default")

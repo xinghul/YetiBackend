@@ -38,6 +38,21 @@ var myApp;
             url: "/game",
             templateUrl: "game"
         })
+        .state("log", {
+            url: "/log",
+            templateUrl: "log",
+            controller: "LogCtrl"
+        })
+            .state("log.mission", {
+                url: "/mission",
+                templateUrl: "log/mission",
+                controller: "LogMissionCtrl"
+            })
+            .state("log.clue", {
+                url: "/clue",
+                templateUrl: "log/clue",
+                controller: "LogClueCtrl"
+            })
         .state("login", {
             url: "/login",
             templateUrl: "login",

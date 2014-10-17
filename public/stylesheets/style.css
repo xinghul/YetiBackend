@@ -56,6 +56,21 @@ path.chord {
   fill-opacity: .67;
 }
 
+.bar rect {
+  fill: steelblue;
+  shape-rendering: crispEdges;
+}
+
+.bar text {
+  fill: #fff;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
 #frame svg {
   display: block;
   margin: auto;

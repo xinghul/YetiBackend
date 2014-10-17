@@ -1,0 +1,12 @@
+nav.navbar.navbar-default(role="navigation")
+    .container-fluid
+        .navbar-header
+            button(class="navbar-toggle", data-toggle="collapse", data-target="#demoNav")
+            a.navbar-brand(href="#/log") Log graph
+        .collapse.navbar-collapse
+            ul.nav.navbar-nav
+                li(ui-sref-active="active")
+                    a(ui-sref=".mission") Mission
+                li(ui-sref-active="active")
+                    a(ui-sref=".clue") Clue
+.ui-view

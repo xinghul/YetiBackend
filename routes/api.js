@@ -106,6 +106,14 @@
         });
     });
 
+    router.get("/log/time", function (req, res) {
+        log.getDuration().then(function (value) {
+            res.json(value);
+        }, function (reason) {
+            res.json(reason);
+        });
+    });
+
     router.post("/log/newgame", function (req, res) {
         log.startNewGame(req.body).then(function (value) {
             res.json({ success: true, log: value} );
