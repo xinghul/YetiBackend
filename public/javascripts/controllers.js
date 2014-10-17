@@ -414,6 +414,7 @@
       };
       $http.get("/api/log/time").
       success(function (data, status, headers, config) {
+          console.log(data);
           $scope.data = data;
       });
 
