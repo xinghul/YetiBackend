@@ -1,89 +1,90 @@
 (function () {
     "use strict";
-    var Q        = require("q");
+    var Q        = require("q"),
+        mongoose = require("mongoose");
     // var User     = require("../models/user");
-    var User     = require("../models/user-playtest.js").User;
+    var User     = mongoose.model("User");
 
-    // exports.signUp = function (data) {
-    //     var deferred = Q.defer();
+    exports.signUp = function (data) {
+        var deferred = Q.defer();
+        console.log(data);
+        process.nextTick(function () {
+            if ([undefined, null, ''].indexOf(data) !== -1 ||
+                [undefined, null, ''].indexOf(data.email) !== -1 ||
+                [undefined, null, ''].indexOf(data.password) !== -1)
+                deferred.reject("Missing credentials!");
+            else {
+                // find a user whose email is the same as the forms email
+                // we are checking to see if the user trying to login already exists
+                User.findOne({ 'local.email' :  data.email }, function (err, user) {
+                    // if there are any errors, return the error
+                    if (err) {
+                        deferred.reject(err);
+                    }
+                    else {
+                        // check to see if theres already a user with that email
+                        if (user) {
+                            deferred.reject("That email is already taken.");
+                        } 
+                        else {
 
-    //     if ([undefined, null, {}].indexOf(data) !== -1 ||
-    //         [undefined, null, {}].indexOf(data.email) !== -1 ||
-    //         [undefined, null, {}].indexOf(data.password) !== -1)
-    //         deferred.reject({ success: false, msg: "Invalid parameters: " + data });
-    //     else {
-    //         // User.findOne wont fire unless data is sent back
-    //         process.nextTick(function () {
+                            // if there is no user with that email
+                            // create the user
+                            var newUser            = new User();
 
-    //             // find a user whose email is the same as the forms email
-    //             // we are checking to see if the user trying to login already exists
-    //             User.findOne({ 'local.email' :  data.email }, function (err, user) {
-    //                 // if there are any errors, return the error
-    //                 if (err) {
-    //                     deferred.reject({ success: false, msg: err });
-    //                 }
-    //                 else {
-    //                     // check to see if theres already a user with that email
-    //                     if (user) {
-    //                         deferred.reject({ success: false, msg: "That email is already taken." });
-    //                     } 
-    //                     else {
+                            // set the user's local credentials
+                            newUser.local.email    = data.email;
+                            newUser.local.password = newUser.generateHash(data.password);
 
-    //                         // if there is no user with that email
-    //                         // create the user
-    //                         var newUser            = new User();
+                            // save the user
+                            newUser.save(function (err) {
+                                if (err)
+                                    deferred.reject(err);
+                                else 
+                                    deferred.resolve(newUser);
+                            });
+                        }
 
-    //                         // set the user's local credentials
-    //                         newUser.local.email    = data.email;
-    //                         newUser.local.password = newUser.generateHash(data.password);
+                    }
+                });     
+            }
+        });    
+        return deferred.promise;
+    };
 
-    //                         // save the user
-    //                         newUser.save(function (err) {
-    //                             if (err)
-    //                                 deferred.reject({ success: false, msg: err });
-    //                             else 
-    //                                 deferred.resolve({ success: true, data: newUser });
-    //                         });
-    //                     }
+    exports.logIn = function (data) {
+        var deferred = Q.defer();
+        console.log(data);
+        process.nextTick(function () {
+            if ([undefined, null, ''].indexOf(data) !== -1 ||
+                [undefined, null, ''].indexOf(data.email) !== -1 ||
+                [undefined, null, ''].indexOf(data.password) !== -1)
+                deferred.reject("Missing credentials!");
+            else {
+                // find a user whose email is the same as the forms email
+                // we are checking to see if the user trying to login already exists
+                User.findOne({ 'local.email' :  data.email }, function (err, user) {
+                    // if there are any errors, return the error before anything else
+                    if (err)
+                        deferred.reject(err);
+                    else {
+                        // if no user is found, return the message
+                        if (!user)
+                            deferred.reject("No user found."); // req.flash is the way to set flashdata using connect-flash
 
-    //                 }
-    //             });     
-    //         });   
-    //     }
-        
-    //     return deferred.promise;
-    // };
+                        // if the user is found but the password is wrong
+                        else if (!user.validPassword(data.password))
+                            deferred.reject("Oops! Wrong password."); // create the loginMessage and save it to session as flashdata
 
-    // exports.logIn = function (data) {
-    //     var deferred = Q.defer();
-    //     if ([undefined, null, {}].indexOf(data) !== -1 ||
-    //         [undefined, null, {}].indexOf(data.email) !== -1 ||
-    //         [undefined, null, {}].indexOf(data.password) !== -1)
-    //         deferred.reject({ success: false, msg: "Invalid parameters: " + data });
-    //     else {
-    //         // find a user whose email is the same as the forms email
-    //         // we are checking to see if the user trying to login already exists
-    //         User.findOne({ 'local.email' :  data.email }, function (err, user) {
-    //             // if there are any errors, return the error before anything else
-    //             if (err)
-    //                 deferred.reject(err);
-    //             else {
-    //                 // if no user is found, return the message
-    //                 if (!user)
-    //                     deferred.reject({ success: false, msg: "No user found." }); // req.flash is the way to set flashdata using connect-flash
-
-    //                 // if the user is found but the password is wrong
-    //                 else if (!user.validPassword(data.password))
-    //                     deferred.reject({ success: false, msg: "Oops! Wrong password." }); // create the loginMessage and save it to session as flashdata
-
-    //                 // all is well, return successful user
-    //                 else
-    //                     deferred.resolve(user);
-    //             }
-    //         });
-    //     }
-    //     return deferred.promise;
-    // };
+                        // all is well, return successful user
+                        else
+                            deferred.resolve(user);
+                    }
+                });
+            }
+        });
+        return deferred.promise;
+    };
 
     exports.quickLogIn = function (data) {
         var deferred = Q.defer();

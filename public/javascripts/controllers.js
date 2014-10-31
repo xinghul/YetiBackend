@@ -334,7 +334,7 @@
   myApp.controller("LoginCtrl", function ($scope, $state, $http, $timeout) {
       $scope.userInfo = {};
       $scope.logIn = function () {
-          $http.post('/api/login', {data: $scope.userInfo}).
+          $http.post('/api/login', $scope.userInfo).
           success(function (data, status, headers, config) {
               console.log(data);
           });
@@ -343,7 +343,7 @@
   myApp.controller("SignupCtrl", function ($scope, $state, $http) {
       $scope.userInfo = {};
       $scope.signUp = function () {
-          $http.post('/api/signup', {data: $scope.userInfo}).
+          $http.post('/api/signup', $scope.userInfo).
           success(function (data, status, headers, config) {
               console.log(data);
           });
@@ -355,7 +355,9 @@
 
   myApp.controller("LogCtrl", function ($scope, $state, $http) {
       $scope.generateGraph = function (values) {
-
+          values = values.map(function (x) {
+            return 10 * x;
+          })
           // A formatter for counts.
           var formatCount = d3.format(",.0f");
 
@@ -372,7 +374,7 @@
 
           // Generate a histogram using twenty uniformly-spaced bins.
           var data = d3.layout.histogram()
-              .bins(x.ticks(max))
+              .bins(x.ticks(20))
               (values);
 
           var y = d3.scale.linear()
@@ -421,9 +423,9 @@
   });
 
   myApp.controller("LogMissionCtrl", function ($scope, $state, $http) {
-      $scope.generateGraph($scope.data.mission);
+      $scope.generateGraph(d3.range(80).map(d3.random.bates(10)));
   });
   myApp.controller("LogClueCtrl", function ($scope, $state, $http) {
-      $scope.generateGraph($scope.data.clue);
+      $scope.generateGraph(d3.range(80).map(d3.random.bates(10)));
   });
 }());

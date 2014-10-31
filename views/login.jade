@@ -2,11 +2,7 @@
     h1
         span(class="fa fa-sign-in")
         | Login
-
-    if  message.length > 0
-        div(class="alert alert-danger")
-            #{message}
-
+        
     form(class="form-horizontal", role="form", id="formLogin")
         div(class="form-group")
             label Email

@@ -14,6 +14,10 @@
 
     }
 
+    router.get("/", function (req, res) {
+        res.send("OK");
+    });
+
     //for player
     router.get('/player', function (req, res) {
         player.getPlayer(req.query.pid).then(function (player) {
@@ -74,27 +78,26 @@
     });
 
     router.post('/animals', function (req, res) {
-        animal.addAnimal(req.body.data).then(function (value) {
+        animal.addAnimal(req.body).then(function (value) {
             res.json(value);
         }, function (reason) {
             res.json(reason);
         });
     });
 
-    //for tablet authenticate
     router.post("/signup", function (req, res) {
         auth.signUp(req.body).then(function (value) {
-            res.json(value);
+            res.json({"success": true, "data": value});
         }, function (reason) {
-            res.json(reason);
+            res.json({"success": false, "msg": reason});
         });
     });
 
     router.post("/login", function (req, res) {
         auth.logIn(req.body).then(function (value) {
-            res.json(value);
+            res.json({"success": true, "data": value});
         }, function (reason) {
-            res.json(reason);
+            res.json({"success": false, "msg": reason});
         });
     });
 

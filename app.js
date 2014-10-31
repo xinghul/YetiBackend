@@ -1,15 +1,17 @@
 (function () {
     "use strict";
-    var express      = require('express');
+    var express      = require('express'),
+        path         = require('path'),
+        fs           = require("fs"),
+        favicon      = require('static-favicon'),
+        logger       = require('morgan'),
+        cookieParser = require('cookie-parser'),
+        bodyParser   = require('body-parser'),
+        mongoose     = require("mongoose"),
+        flash        = require("flash"),
+        session      = require("express-session");
+
     var app          = express();
-    var path         = require('path');
-    var favicon      = require('static-favicon');
-    var logger       = require('morgan');
-    var cookieParser = require('cookie-parser');
-    var bodyParser   = require('body-parser');
-    var mongoose     = require("mongoose");
-    var flash        = require("flash");
-    var session      = require("express-session");
 
     var configDB     = require("./config/database");
     mongoose.connect(configDB.url, function (err) {
@@ -17,6 +19,11 @@
             console.log(configDB.successMsg);
         else
             console.log(err, err.stack);
+    });
+
+    var modelsPath     = path.join(__dirname, "lib/models");
+    fs.readdirSync(modelsPath).forEach(function (file) {
+        require(modelsPath + "/" + file);
     });
 
     // view engine setup

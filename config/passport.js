@@ -1,11 +1,12 @@
 (function () {
     "use strict";
     // load all the things we need
-    var Q = require("q");
+    var Q        = require("q"),
+        mongoose = require("mongoose");
     var LocalStrategy   = require('passport-local').Strategy;
 
     // load up the user model
-    var User            = require('../routes/models/user');
+    var User            = mongoose.model("User");
 
     // expose this function to our app using module.exports
     module.exports = function (passport) {
