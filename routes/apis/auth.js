@@ -85,37 +85,4 @@
         });
         return deferred.promise;
     };
-
-    exports.quickLogIn = function (data) {
-        var deferred = Q.defer();
-        if ([undefined, null].indexOf(data)     !== -1 ||
-            [undefined, null].indexOf(data.mac) !== -1) {
-            deferred.reject("Invalid parameters: " + data);
-        }
-        else {
-            User.findOne({mac: data.mac}, function (err, user) {
-                if (err)
-                    deferred.reject(err);
-                else if (!user) {
-                    //user not found, register a new one
-                    var newUser    = new User();
-                    newUser.mac    = data.mac
-                    //store the hash of mac into the database
-                    newUser.hash   = newUser.generateHash(data.mac);
-
-                    // save the user
-                    newUser.save(function (err) {
-                        if (err)
-                            deferred.reject(err);
-                        else 
-                            deferred.resolve(newUser);
-                    });
-                }
-                else {
-                    deferred.resolve(user);
-                }
-            });
-        }
-        return deferred.promise;
-    };
 }());

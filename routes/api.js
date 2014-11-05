@@ -101,48 +101,16 @@
         });
     });
 
-    router.post("/quicklogin", function (req, res) {
-        auth.quickLogIn(req.body).then(function (value) {
-            res.json({ success: true, user: value} );
-        }, function (reason) {
-            res.json({ success: false, msg: reason} );
-        });
-    });
-
-    router.get("/log/time", function (req, res) {
-        log.getDuration().then(function (value) {
-            res.json(value);
-        }, function (reason) {
-            res.json(reason);
-        });
-    });
-
-    router.post("/log/newgame", function (req, res) {
-        log.startNewGame(req.body).then(function (value) {
+    router.post("/log/begingame", function (req, res) {
+        log.beginGame(req.body).then(function (value) {
             res.json({ success: true, log: value} );
         }, function (reason) {
             res.json({ success: false, msg: reason} );
         });
     });
 
-    router.post("/log/firstclue", function (req, res) {
-        log.firstClueTapped(req.body).then(function (value) {
-            res.json({ success: true, log: value} );
-        }, function (reason) {
-            res.json({ success: false, msg: reason} );
-        });
-    });
-
-    router.post("/log/firstanimal", function (req, res) {
-        log.firstAnimalTapped(req.body).then(function (value) {
-            res.json({ success: true, log: value} );
-        }, function (reason) {
-            res.json({ success: false, msg: reason} );
-        });
-    });
-
-    router.post("/log/firstmission", function (req, res) {
-        log.firstMissionCompleted(req.body).then(function (value) {
+    router.post("/log/endgame", function (req, res) {
+        log.endGame(req.body).then(function (value) {
             res.json({ success: true, log: value} );
         }, function (reason) {
             res.json({ success: false, msg: reason} );
@@ -150,7 +118,7 @@
     });
 
     router.get("/log/download", function (req, res) {
-        log.downloadLog().then(function (value) {
+        log.getAll().then(function (value) {
             res.attachment('result.json');
             res.setHeader('Content-Type', 'application/octet-stream');
             res.end(JSON.stringify(value, null, 2), 'utf8');
