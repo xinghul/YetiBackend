@@ -103,17 +103,25 @@
 
     router.post("/log/begingame", function (req, res) {
         log.beginGame(req.body).then(function (value) {
-            res.json({ success: true, log: value} );
+            res.json({ success: true, log: value });
         }, function (reason) {
-            res.json({ success: false, msg: reason} );
+            res.json({ success: false, msg: reason });
         });
     });
 
     router.post("/log/endgame", function (req, res) {
         log.endGame(req.body).then(function (value) {
-            res.json({ success: true, log: value} );
+            res.json({ success: true, log: value });
         }, function (reason) {
-            res.json({ success: false, msg: reason} );
+            res.json({ success: false, msg: reason });
+        });
+    });
+
+    router.post("/log/position", function (req, res) {
+        log.recordPosition(req.body).then(function (value) {
+            res.json({ success: true, log: value });
+        }, function (reason) {
+            res.json({ success: false, msg: reason });
         });
     });
 
