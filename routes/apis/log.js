@@ -73,8 +73,7 @@
             var deferred = Q.defer();
             if ([undefined, null].indexOf(data)          !== -1 ||
                 [undefined, null].indexOf(data.userid)   !== -1 ||
-                [undefined, null].indexOf(data.logid)    !== -1 ||
-                [undefined, null].indexOf(data.position) !== -1)
+                [undefined, null].indexOf(data.logid)    !== -1)
                 deferred.reject("Invalid parameter: " + data);
             else {
                 User.findOne({ _id : data.userid }, function (err, user) {
@@ -90,8 +89,12 @@
                                 deferred.reject("Validate log failed: " + data);
                             }
                             else {
-                                var newPos = data.position;
-                                newPos.timestamp = new Date();
+                                var newPos = {
+                                    "x"         : data.x,
+                                    "y"         : data.y,
+                                    "z"         : data.z,
+                                    "timestamp" : new Date()
+                                };
                                 log.track.push(newPos);
                                 log.save(function (err, product, numberAffected) {
                                     if (err)
