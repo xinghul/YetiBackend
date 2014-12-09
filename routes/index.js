@@ -12,11 +12,11 @@
 
     
 
-    var isLoggedIn = function (req, res, next) {
-        if (req.isAuthenticated())
-            return next();
-        res.redirect("/")
-    }
+    // var isLoggedIn = function (req, res, next) {
+    //     if (req.isAuthenticated())
+    //         return next();
+    //     res.redirect("/")
+    // }
 
     /* GET home page. */
     router.get('/', function (req, res) {
@@ -31,8 +31,8 @@
         res.render('dbeacon');
     });
 
-    router.get('/player', function (req, res) {
-        res.render('player');
+    router.get('/user', function (req, res) {
+        res.render('user');
     });
 
     router.get('/animal', function (req, res) {

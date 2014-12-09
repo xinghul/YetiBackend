@@ -1,5 +1,8 @@
 (function () {
     "use strict";
+    /**********************************************************
+     *                      Load Modules                      * 
+     **********************************************************/
     var express      = require('express'),
         path         = require('path'),
         fs           = require("fs"),
@@ -12,6 +15,10 @@
         session      = require("express-session");
 
     var app          = express();
+
+    /**********************************************************
+     *           Connect MongoDB, Bootstrap models            * 
+     **********************************************************/
 
     var configDB     = require("./config/database");
     mongoose.connect(configDB.url, function (err) {
@@ -26,7 +33,9 @@
         require(modelsPath + "/" + file);
     });
 
-    // view engine setup
+    /**********************************************************
+     *                     Configuration                      * 
+     **********************************************************/
     app.set('views', path.join(__dirname, 'views'));
     app.set('view engine', 'jade');
 
@@ -42,6 +51,11 @@
     }));
     app.use(flash());
     app.use(express.static(path.join(__dirname, 'public')));
+
+
+    /**********************************************************
+     *                         Routes                         * 
+     **********************************************************/
 
     var routes = require("./routes/index");
 

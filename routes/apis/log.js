@@ -1,10 +1,10 @@
 (function () {
     "use strict";
-    var mongoose = require("mongoose");
-    var Q        = require("q");
+    var mongoose = require("mongoose"),
+        Q        = require("q");
 
-    var User     = mongoose.model("User");
-    var Log      = mongoose.model("Log");
+    var User     = mongoose.model("User"),
+        Log      = mongoose.model("Log");
 
     module.exports = {
         beginGame : function(data) {

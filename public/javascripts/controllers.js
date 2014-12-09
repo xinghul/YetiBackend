@@ -272,14 +272,14 @@
           .attr("r", 13);
     }
   });
-  myApp.controller('PlayerCtrl', function ($scope, $state, $http, $timeout) {
-      $scope.playerDetails = null;
-      $http.get('/api/players').
+  myApp.controller('UserCtrl', function ($scope, $state, $http, $timeout) {
+      $scope.userDetails = null;
+      $http.get('/api/users').
       success(function (data, status, headers, config) {
-          $scope.players = data;
+          $scope.users = data;
       });
-      $scope.addPlayer = function () {
-        $http.post('/api/players', {"name": $scope.playerName}).
+      $scope.addUser = function () {
+        $http.post('/api/users', {"username": $scope.newUsername, "password": $scope.newPassword}).
             success(function (data) {
                 return $timeout(function () {
                     $state.go('.', {}, { reload: true });
@@ -287,13 +287,13 @@
             });
       };
       $scope.showDetails = function (data) {
-          $scope.playerDetails = data;
+          $scope.userDetails = data;
       }
-      $scope.deletePlayer = function () {
-          $http.delete('/api/player/' + $scope.playerDetails.pid).
+      $scope.deleteUser = function () {
+          $http.delete('/api/user/' + $scope.userDetails.uid).
               success(function (data, status, headers, config) {
                   return $timeout(function () {
-                      $state.go('player', {}, { reload: true });
+                      $state.go('user', {}, { reload: true });
                   }, 1000);
               }).
               error(function (data, status, headers, config) {

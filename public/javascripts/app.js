@@ -19,10 +19,10 @@ var myApp;
             url: "/",
             templateUrl: "about"
         })
-        .state('player', {
-            url: '/player',
-            templateUrl: 'player',
-            controller: 'PlayerCtrl'
+        .state('user', {
+            url: '/user',
+            templateUrl: 'user',
+            controller: 'UserCtrl'
         })
         .state('animal', {
             url: '/animal',

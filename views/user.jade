@@ -1,0 +1,56 @@
+.col-md-5
+  div(class="display-table")
+    span(class="display-title")
+      i(class="fa fa-fw fa-lg fa-flag")
+      | Users
+    table.table.table-bordered.table-hover.table-striped
+      thead
+        tr
+          th #
+          th uid
+          th username
+      tbody
+        tr(ng-repeat="user in users", ng-click="showDetails(user)")
+          td {{users.indexOf(user)}}
+          td {{user.uid}}
+          td {{user.username}}
+    button(class='btn btn-success', data-toggle="modal", data-target="#modalAddUser", id="showModalAddUser") 
+      i(class="fa fa-plus fa-fw fa-lg")
+      | Add
+.col-md-7
+  div(ng-show="userDetails", class="display-table")
+    span(class="display-title")
+      i(class="fa fa-fw fa-lg fa-spin fa-cog")
+      | Details
+    table.table.table-bordered.table-hover.table-striped
+      tr(ng-repeat='(key, value) in userDetails')
+        th {{key}}
+        td {{value}}
+    div(class="text-right")
+      button(class="btn btn-danger", ng-click="deleteUser()") 
+        i(class="fa fa-trash fa-fw fa-lg")
+        | Delete
+  div(class="modal fade", id="modalAddUser", tabindex="-1", role="dialog", aria-labelledby="labelAddUser", aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        .modal-header 
+          button(type="button", class="close", data-dismiss="modal", aria-hidden="true") &times;
+          h4(class="modal-title") Add User
+        .modal-body
+          div(class="text-center")
+            form(class="form", role="form", id="formAddUser")
+              div(class="form-group")
+                div(class="input-group")
+                  span(class="input-group-addon")
+                      i(class="fa fa-fw fa-lg fa-envelope")
+                  input(type="text", class="form-control", placeholder="Your username", name="username", ng-model="newUsername")
+              div(class="form-group")
+                div(class="input-group")
+                  span(class="input-group-addon")
+                      i(class="fa fa-fw fa-lg fa-lock")
+                  input(type="text", class="form-control", placeholder="Your password", name="password", ng-model="newPassword")
+        .modal-footer
+          button(class="btn btn-default", data-dismiss="modal") Close
+          button(ng-click='addUser()', data-dismiss="modal", class="btn btn-success") Add
+
+

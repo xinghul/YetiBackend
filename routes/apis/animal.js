@@ -1,7 +1,7 @@
 (function () {
     "use strict";
     var mongoose = require("mongoose");
-    var Counter = require("../models/counter");
+    var Counter = mongoose.model("Counter");
     var Q = require("q");
 
     var Animal = (function () {

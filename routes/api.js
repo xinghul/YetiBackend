@@ -4,7 +4,7 @@
     var Q        = require('q');
     var router   = express.Router();
 
-    var player   = require('./apis/player');
+    var user     = require('./apis/user');
     var animal   = require('./apis/animal');
     var dBeacon  = require('./apis/dBeacon');
     var auth     = require("./apis/auth");
@@ -19,33 +19,41 @@
     });
 
     //for player
-    router.get('/player', function (req, res) {
-        player.getPlayer(req.query.pid).then(function (player) {
-            res.json(player);
+    router.get('/user', function (req, res) {
+        user.getUser(req.query.uid).then(function (user) {
+            res.json(user);
         }, function (reason) {
             console.log(reason);
             res.json(reason);
         });
     });
 
-    router.delete('/player/:pid', function (req, res) {
-        player.deletePlayer(req.params.pid).then(function (value) {
+    router.delete('/user/:uid', function (req, res) {
+        user.deleteUser(req.params.uid).then(function (value) {
             res.json(value);
         }, function (reason) {
             res.json(reason);
         });
     });
 
-    router.get('/players', function (req, res) {
-        player.getPlayers().then(function (players) {
-            res.json(players);
+    router.get('/users', function (req, res) {
+        user.getUsers().then(function (users) {
+            res.json(users);
         }, function (reason) {
             res.json(reason);
         });
     });
 
-    router.post('/players', function (req, res) {
-        player.addPlayer(req.body.name).then(function (value) {
+    router.post('/users', function (req, res) {
+        user.addUser(req.body).then(function (value) {
+            res.json(value);
+        }, function (reason) {
+            res.json(reason);
+        });
+    });
+
+    router.post("/user/unlock", function (req, res) {
+        user.unlockEntry(req.body).then(function (value) {
             res.json(value);
         }, function (reason) {
             res.json(reason);
