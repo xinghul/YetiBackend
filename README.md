@@ -31,7 +31,7 @@ Which means you have successfully installed `Node.js`.
 
 https://github.com/joyent/node/wiki/installing-node.js-via-package-manager
 
-**Install Neo4j:**
+**Install Neo4j(Optional):**
 
 Again, follow the instruction at:
 
@@ -133,8 +133,8 @@ sudo npm install -g bower
 
 **Clone the folder from github:**
 ```
-git clone https://github.com/xinghul/dBeacon-backend.git
-cd dBeacon-backend
+git clone https://github.com/xinghul/YetiBackend.git
+cd YetiBackend
 ```
 
 **Install node modules using npm:**
@@ -144,25 +144,34 @@ sudo npm install
 This command will parse `package.json` and install all the node modules needed under the `node_modules/` directory:
 ```json
 {
-  "name": "dBeaconBackend",
+  "name": "YetiBackend",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "express": "~4.2.0",
-    "static-favicon": "~1.0.0",
-    "morgan": "~1.0.0",
-    "cookie-parser": "~1.0.1",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.0.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "~1.0.1",
     "debug": "~0.7.4",
+    "express": "~4.2.0",
+    "express-session": "^1.8.2",
+    "flash": "^1.1.0",
     "jade": "~1.3.0",
-    "connect-multiparty": "~1.0.5",
-    "neo4j": "~1.1.0",
-    "request": "~2.36.0",
-    "fast-csv": "~0.4.1",
-    "forever": "0.11.x"
+    "mongodb": "^1.4.12",
+    "mongoose": "^3.8.16",
+    "morgan": "~1.0.0",
+    "neo4j": "^1.1.0",
+    "passport": "^0.2.1",
+    "passport-facebook": "^1.0.3",
+    "passport-google-oauth": "^0.1.5",
+    "passport-local": "^1.0.0",
+    "passport-twitter": "^1.0.2",
+    "q": "^1.0.1",
+    "request": "^2.44.0",
+    "static-favicon": "~1.0.0"
   }
 }
 ```
@@ -174,21 +183,22 @@ bower install
 This command will parse `bower.json` and install packages including jQuery, Angular, Bootstrap and D3 under `public/bower_components`:
 ```json
 {
-  "name": "JudyBackend",
-  "description": "Backend for Judy's database",
+  "name": "Yeti Backend",
+  "description": "Team Yeti's backend website",
   "version": "1.0.0",
-  "license": "NTG",
   "private": true,
   "dependencies": {
-    "jquery": "2.1.x",
-    "bootstrapvalidator": "0.5.x",
-    "angular": "1.2.x",
-    "angular-route": "1.2.x",
-    "angular-loader": "1.2.x",
+    "jquery": "~2.1.x",
+    "bootstrapvalidator": "~0.5.x",
+    "angular": "~1.2.x",
+    "angular-route": "~1.2.x",
+    "angular-loader": "~1.2.x",
     "angular-mocks": "~1.2.x",
     "html5-boilerplate": "~4.3.0",
-    "bootstrap": "3.2.x",
-    "d3": "3.4.x"
+    "bootstrap": "~3.2.x",
+    "d3": "~3.4.x",
+    "angular-ui-router": "~0.2.11",
+    "fontawesome": "~4.2.0"
   }
 }
 ```
@@ -201,14 +211,14 @@ sudo npm start
 ```
 It should output something like:
 ```
-> dBeaconBackend@0.0.1 start /Users/User1/Documents/Projects/dBeacon-backend
+> YetiBackend@0.0.1 start /Users/User1/Documents/Projects/YetiBackend
 > node ./bin/www
 
-dBeacon server listening on port 3001
+Yeti server listening on port 3000
 ```
-If you see the information above, which means you have a serve running on port 3001(you can change it later in bin/www), you should be able to visit the page:
+If you see the information above, which means you have a serve running on port 3000(you can change it later in bin/www), you should be able to visit the page:
 
-http://localhost:3001/
+http://localhost:3000/
 
 Or, you can use `forever` to run the server, you might need to install `forever` globally first:
 ```
