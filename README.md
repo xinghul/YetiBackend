@@ -242,7 +242,7 @@ Note that you won't be able to stop the process by simply kill the process.
 
 To stop the process, run `forever stop process_id`, `process_id` here stands for the corresponding process id. For example, the process id above is 0.
 
-So you can stop the process above by simply run `foreve stop 0`.
+So you can stop the process above by simply run `forever stop 0` or `forever stopall`.
 
 ### **3. REST APIs**
 
