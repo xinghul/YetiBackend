@@ -9,10 +9,6 @@ For backend, I'm using `Node` + `Express` + `Neo4j`.
 
 For frontend, I'm using `Angular` + `Bootstrap` + `Jade` + `D3`
 
-If everything works well, it should look like this in the browser:
-
-![Screen Shot](Screenshot.png)
-
 ### **1. Installation**
 
 **Install Node.js:**
@@ -240,6 +236,5 @@ So you can stop the process above by simply run `foreve stop 0`.
 
 ### **3. REST APIs**
 
-You can view all the available APIs in [index.js](routes/index.js).
+You can view all the available APIs in [index.js](routes/index.js) and [api.js](routes/api.js).
 
-Some of them might be deprecated and need a little modification in order to be used.
